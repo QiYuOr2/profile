@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@react-hookz/web':
+    specifier: ^25.1.0
+    version: 25.1.0(react-dom@19.0.0)(react@19.0.0)
   '@react-spring/parallax':
     specifier: ^9.7.5
     version: 9.7.5(react-dom@19.0.0)(react@19.0.0)
@@ -680,6 +683,27 @@ packages:
     dependencies:
       quansync: 0.2.8
     dev: true
+
+  /@react-hookz/deep-equal@3.0.3:
+    resolution: {integrity: sha512-SLy+NmiDpncqc2d9TR4Y4R7f8lUFOQK9WbnIq02A6wDxy+dTHfA2Np0dPvj0SFp6i1nqERLmEUe9MxPLuO/IqA==}
+    engines: {node: '>=18.0.0'}
+    dev: false
+
+  /@react-hookz/web@25.1.0(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-+ra/hRG5vPXbwzvQp+YQRn+YlnFNd3eM/lieYW7M/YY2kUjM3ODmD3sZksFQ4P0eVUlqLXe+kSipw8fvLX4mww==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      js-cookie: ^3.0.5
+      react: ^16.8 || ^17 || ^18 || ^19
+      react-dom: ^16.8 || ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      js-cookie:
+        optional: true
+    dependencies:
+      '@react-hookz/deep-equal': 3.0.3
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: false
 
   /@react-spring/animated@9.7.5(react@19.0.0):
     resolution: {integrity: sha512-Tqrwz7pIlsSDITzxoLS3n/v/YCUHQdOIKtOJf4yL6kYVSDTSmVK1LI1Q3M/uu2Sx4X3pIWF3xLUhlsA6SPNTNg==}
