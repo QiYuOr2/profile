@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PROFILE } from './constants';
 import { FloatingStep } from './components/FloatingStep';
 import { useThrottledState } from '@react-hookz/web'
+import { useInterpolatedStyles } from './hooks/useInterpolatedStyles';
 
 interface PageProps {
   offset: number
@@ -101,11 +102,17 @@ export default function App() {
     }
   }, [basicStyle])
 
+  const avatarTargetRef = useRef<HTMLDivElement>(null)
 
+  useInterpolatedStyles({
+    element: avatarRef,
+    target: avatarTargetRef
+  })
 
   return (
     <>
       <div className='flex items-center justify-center h-screen'>
+        <div ref={avatarTargetRef} className='fixed left-5 top-5 w-10 h-10'></div>
         <div
           ref={avatarRef}
           className='w-20 h-20 rounded-full shadow-md overflow-hidden'
