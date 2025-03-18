@@ -1,5 +1,5 @@
 import { ParallaxLayer, Parallax, IParallax } from '@react-spring/parallax'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { PROFILE } from './constants';
 import { FloatingStep } from './components/FloatingStep';
 import { useThrottledState } from '@react-hookz/web'
@@ -29,85 +29,37 @@ function Experience({ offset }: PageProps) {
   )
 }
 
-
 export default function App() {
   const parallax = useRef<IParallax>(null!);
-
-  const [currentStep, setCurrentStep] = useThrottledState(0, 500)
+  const [currentStep, setCurrentStep] = useThrottledState(0, 500);
+  const avatarRef = useRef<HTMLDivElement>(null);
+  const avatarTargetRef = useRef<HTMLDivElement>(null);
 
   const scrollTo = (to: number) => {
-    if (!parallax.current) {
-      return
-    }
-    parallax.current.scrollTo(to)
-  }
-
-  const avatarRef = useRef<HTMLDivElement>(null)
-  const [basicStyle, setBasicStyle] = useState({ width: 0, height: 0, left: 0, top: 0 })
-  const [avatarStyle, setAvatarStyle] = useState({ width: 0, height: 0, left: 0, top: 0 })
+    if (!parallax.current) return;
+    parallax.current.scrollTo(to);
+  };
 
   useEffect(() => {
-    if (avatarRef.current) {
-      const rect = avatarRef.current.getBoundingClientRect();
-      setBasicStyle({
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top,
-      })
-    }
+    const scrollContainer = parallax.current?.container.current;
+    if (!scrollContainer) return;
 
-  }, [])
+    const computedCurrentStep = () => {
+      const containerHeight = parallax.current.container.current.clientHeight;
+      const scrollTop = parallax.current.container.current.scrollTop;
+      
+      setCurrentStep(Math.round(scrollTop / containerHeight));
+    };
 
+    scrollContainer.addEventListener('scroll', computedCurrentStep);
+    return () => scrollContainer.removeEventListener('scroll', computedCurrentStep);
+  }, [setCurrentStep]);
 
-  const computedCurrentStep = () => {
-    const containerHeight = parallax.current.container.current.clientHeight
-    const scrollTop = parallax.current.container.current.scrollTop
-
-    setCurrentStep(Math.round(scrollTop / containerHeight))
-  }
-
-  
-  const computedAvatarStyle = () => {
-    const scrollTop = parallax.current.container.current.scrollTop
-    if (avatarRef.current) {
-
-      const target = {
-        width: 50,
-        height: 50,
-        left: 50,
-        top: 50,
-      }
-
-      const progress = Math.min(1, scrollTop / basicStyle.top);
-
-      setAvatarStyle({
-        width: basicStyle.width + progress * (target.width - basicStyle.width),
-        height: basicStyle.height + progress * (target.height - basicStyle.height),
-        left: basicStyle.left + progress * (target.left - basicStyle.left),
-        top: basicStyle.top + progress * (target.top - basicStyle.top)
-      })
-    }
-  }
-
-
-
-  useEffect(() => {
-    parallax.current?.container.current.addEventListener('scroll', computedCurrentStep)
-    parallax.current?.container.current.addEventListener('scroll', computedAvatarStyle)
-
-    return () => {
-      parallax.current?.container.current.removeEventListener('scroll', computedCurrentStep)
-      parallax.current?.container.current.removeEventListener('scroll', computedAvatarStyle)
-    }
-  }, [basicStyle])
-
-  const avatarTargetRef = useRef<HTMLDivElement>(null)
-
-  useInterpolatedStyles({
+  const { elementStyle } = useInterpolatedStyles({
     element: avatarRef,
-    target: avatarTargetRef
-  })
+    target: avatarTargetRef,
+    parallax
+  });
 
   return (
     <>
@@ -116,18 +68,18 @@ export default function App() {
         <div
           ref={avatarRef}
           className='w-20 h-20 rounded-full shadow-md overflow-hidden'
-          style={avatarStyle.width ? { ...avatarStyle, position: 'fixed', 'zIndex': 100 } : {}}
+          style={elementStyle.width ? { ...elementStyle, position: 'fixed', zIndex: 100 } : {}}
         >
-          <img className='w-full h-full ' src={PROFILE.Avatar} alt="avatar" />
+          <img className='w-full h-full' src={PROFILE.Avatar} alt="avatar" />
         </div>
       </div>
 
       <Parallax ref={parallax} pages={3} style={{ top: '0', left: '0' }}>
         <Bento offset={1} />
         <Experience offset={2} />
-      </Parallax >
+      </Parallax>
 
       <FloatingStep step={3} currentStep={currentStep} toNextStep={scrollTo} />
     </>
-  )
+  );
 }

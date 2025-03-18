@@ -10,13 +10,16 @@ interface Rect {
 interface UseInterpolatedStylesOptions<T> {
   element: React.RefObject<T>;
   target: React.RefObject<T>;
+  parallax: React.RefObject<{
+    container: React.RefObject<HTMLElement>;
+  }>;
 }
 
 function isHTMLElement(element: unknown): element is HTMLElement {
   return !!(element as HTMLElement).getBoundingClientRect;
 }
 
-export function useInterpolatedStyles<T>({ element, target }: UseInterpolatedStylesOptions<T>) {
+export function useInterpolatedStyles<T>({ element, target, parallax }: UseInterpolatedStylesOptions<T>) {
   const [basicStyle, setBasicStyle] = useState({ width: 0, height: 0, left: 0, top: 0 });
   const [targetStyle, setTargetStyle] = useState({ width: 0, height: 0, left: 0, top: 0 });
   const [elementStyle, setElementStyle] = useState({ width: 0, height: 0, left: 0, top: 0 });
@@ -44,9 +47,14 @@ export function useInterpolatedStyles<T>({ element, target }: UseInterpolatedSty
     setStyle(target, setTargetStyle);
   }, [target, setStyle]);
 
-  const computedAvatarStyle = () => {
-    const scrollTop = parallax.current.container.current.scrollTop;
-    if (element.current) {
+  useEffect(() => {
+    if (!parallax.current?.container.current) return;
+
+    const container = parallax.current.container.current;
+    const handleScroll = () => {
+      if (!element.current || !container) return;
+      
+      const scrollTop = container.scrollTop;
       const progress = Math.min(1, scrollTop / basicStyle.top);
 
       setElementStyle({
@@ -55,8 +63,13 @@ export function useInterpolatedStyles<T>({ element, target }: UseInterpolatedSty
         left: basicStyle.left + progress * (targetStyle.left - basicStyle.left),
         top: basicStyle.top + progress * (targetStyle.top - basicStyle.top),
       });
-    }
-  };
+    };
 
-  return {};
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [basicStyle, element, parallax, targetStyle]);
+
+  return {
+    elementStyle,
+  };
 }
