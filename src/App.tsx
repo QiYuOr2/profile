@@ -4,20 +4,10 @@ import { PROFILE } from './constants';
 import { FloatingStep } from './components/FloatingStep';
 import { useThrottledState } from '@react-hookz/web'
 import { useInterpolatedStyles } from './hooks/useInterpolatedStyles';
+import { PageProps } from './types';
+import { Bento } from './components/Bento';
 
-interface PageProps {
-  offset: number
-}
 
-function Bento({ offset }: PageProps) {
-  return (
-    <>
-      <ParallaxLayer offset={offset}>
-        便当式个人信息
-      </ParallaxLayer>
-    </>
-  )
-}
 
 function Experience({ offset }: PageProps) {
   return (
@@ -47,7 +37,7 @@ export default function App() {
     const computedCurrentStep = () => {
       const containerHeight = parallax.current.container.current.clientHeight;
       const scrollTop = parallax.current.container.current.scrollTop;
-      
+
       setCurrentStep(Math.round(scrollTop / containerHeight));
     };
 

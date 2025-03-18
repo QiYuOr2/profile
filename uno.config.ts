@@ -2,6 +2,7 @@ import {
   defineConfig,
   presetAttributify,
   presetWind3,
+  presetIcons,
   transformerDirectives,
   transformerVariantGroup
 } from 'unocss'
@@ -9,6 +10,7 @@ import {
 export default defineConfig({
   presets: [
     presetAttributify(),
+    presetIcons(),
     presetWind3()
   ],
   transformers: [
