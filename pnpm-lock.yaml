@@ -20,6 +20,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.1.0
         version: 9.1.0(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -33,6 +36,12 @@ importers:
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
+      '@iconify-json/proicons':
+        specifier: ^1.2.15
+        version: 1.2.15
+      '@iconify-json/ri':
+        specifier: ^1.2.5
+        version: 1.2.5
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.11
@@ -378,6 +387,12 @@ packages:
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
+
+  '@iconify-json/proicons@1.2.15':
+    resolution: {integrity: sha512-0KvaFvpv0ZZDyEzkvXVQ2sSKLNn8sFAkNj4jJIUYN+qTwHahq+zl1pjAYSPqWrfM7Jkbvos4EFghAoWxy8i5Zw==}
+
+  '@iconify-json/ri@1.2.5':
+    resolution: {integrity: sha512-kWGimOXMZrlYusjBKKXYOWcKhbOHusFsmrmRGmjS7rH0BpML5A9/fy8KHZqFOwZfC4M6amObQYbh8BqO5cMC3w==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -973,6 +988,9 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
@@ -2000,6 +2018,14 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/proicons@1.2.15':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/ri@1.2.5':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify/types@2.0.0': {}
 
   '@iconify/utils@2.3.0':
@@ -2704,6 +2730,8 @@ snapshots:
       source-map-js: 1.2.1
 
   csstype@3.1.3: {}
+
+  dayjs@1.11.13: {}
 
   debug@4.4.0:
     dependencies:

@@ -8,6 +8,11 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  shortcuts: [
+    {
+      'bento-box': 'rounded-lg shadow-md bg-white border border-gray-200'
+    }
+  ],
   presets: [
     presetAttributify(),
     presetIcons(),
