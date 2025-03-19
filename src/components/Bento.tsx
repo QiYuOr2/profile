@@ -3,6 +3,7 @@ import { PageProps } from "../types"
 import { useEffect, useRef } from "react"
 import { PROFILE } from "../constants"
 import dayjs from 'dayjs'
+import { ParallaxCard } from "./ParallaxCard"
 
 interface BentoProps extends PageProps {
   onAvatarVisible: (isVisible: boolean) => void
@@ -30,7 +31,7 @@ function Skills() {
       <div className="absolute right--5 bottom--8 text-8em font-bold color-transparent text-stroke-6 text-stroke-hex-aaa op10">Skills</div>
       <div className="text-xl font-bold">前端从业 {diff} 年</div>
       <div className="flex w-3/4 flex-wrap gap-2 text-xl">
-        {skillIcons.map(icon => <i className={`${icon} inline-block`}></i>)}
+        {skillIcons.map(icon => <i key={icon} className={`${icon} inline-block`}></i>)}
       </div>
     </div>
   )
@@ -79,7 +80,9 @@ export function Bento({ offset, onAvatarVisible }: BentoProps) {
             <Education />
           </div>
           <div className='bento-box bento bg-no-repeat bg-cover bg-right' style={{ '--bento-lg': '1 / 5 / 3 / 9', backgroundImage: "url('//cdn.jsdelivr.net/gh/qiyuor2/blog-image/img/20250319uji2.jpg')" }}></div>
-          <div className='bento-box bento' style={{ '--bento-lg': '3 / 3 / 6 / 7' }}>视差效果 & 简单的编辑器窗口样式</div>
+          <ParallaxCard className='bento-box bento' style={{ '--bento-lg': '3 / 3 / 6 / 7' }}>
+            <div className="p-4"></div>
+          </ParallaxCard>
           <div className='bento-box bento' style={{ '--bento-lg': '5 / 1 / 8 / 3' }}>地理位置/ 3D 地球</div>
           <div className='bento-box bento' style={{ '--bento-lg': '3 / 7 / 5 / 9' }}>联系方式</div>
           <div className='bento-box bento' style={{ '--bento-lg': '6 / 3 / 8 / 7' }}>

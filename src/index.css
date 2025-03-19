@@ -27,3 +27,15 @@ body {
 .bento {
   grid-area: var(--bento-lg);
 }
+
+.parallax-card {
+  transform: rotateX(calc(var(--parallax-rotateX) * 1deg)) rotateY(calc(var(--parallax-rotateY) * 1deg));
+}
+
+.parallax-card--3d {
+  transform: translate3d(
+    calc(var(--parallax-offset) * var(--parallax-rotateY) / var(--max-rotate) * 1%),
+    calc(var(--parallax-offset) * var(--parallax-rotateX) / var(--max-rotate) * -1%),
+    0
+  );
+}
