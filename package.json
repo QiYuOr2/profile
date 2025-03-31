@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-language": "^1.0.1",
     "@react-hookz/web": "^25.1.0",
     "@react-spring/parallax": "^9.7.5",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
     "dayjs": "^1.11.13",
+    "mapbox-gl": "^3.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { PROFILE } from "../constants"
 import dayjs from 'dayjs'
 import { ParallaxCard } from "./ParallaxCard"
+import { MapBox } from "./Map"
 
 interface BentoProps extends PageProps {
   onAvatarVisible: (isVisible: boolean) => void
@@ -74,7 +75,7 @@ export function Bento({ offset, onAvatarVisible }: BentoProps) {
   return (
     <>
       <ParallaxLayer offset={offset} speed={0.5}>
-        <div className='grid grid-rows-[repeat(7,_5rem)] grid-cols-[repeat(8,_5rem)] gap-6 justify-center'>
+        <div className='grid grid-rows-[repeat(7,_5rem)] grid-cols-[repeat(8,_5rem)] gap-6 justify-center pt-40'>
           <div className='bento-box bento' style={{ '--bento-lg': '1 / 1 / 5 / 3' }}>卡片1</div>
           <div className='bento-box bento' style={{ '--bento-lg': '1 / 3 / 3 / 5' }}>
             <Education />
@@ -83,7 +84,9 @@ export function Bento({ offset, onAvatarVisible }: BentoProps) {
           <ParallaxCard className='bento-box bento' style={{ '--bento-lg': '3 / 3 / 6 / 7' }}>
             <div className="p-4"></div>
           </ParallaxCard>
-          <div className='bento-box bento' style={{ '--bento-lg': '5 / 1 / 8 / 3' }}>地理位置/ 3D 地球</div>
+          <div className='bento-box bento overflow-hidden' style={{ '--bento-lg': '5 / 1 / 8 / 3' }}>
+            <MapBox />
+          </div>
           <div className='bento-box bento' style={{ '--bento-lg': '3 / 7 / 5 / 9' }}>联系方式</div>
           <div className='bento-box bento' style={{ '--bento-lg': '6 / 3 / 8 / 7' }}>
             <Skills />
